@@ -17,7 +17,7 @@ class CreateBlogPostsTable extends Migration
             $table->increments('id');
 
             $table->integer('category_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
 
             $table->string('slug')->unique();
             $table->string('title');
@@ -33,8 +33,8 @@ class CreateBlogPostsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreing('user_id')->references('id')->on('users');
-            $table->foreing('category_id')->references('id')->on('blog_categories');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('blog_categories');
 
             $table->index('is_published');
         });
