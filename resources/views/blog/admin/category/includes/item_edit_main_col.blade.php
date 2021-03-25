@@ -1,5 +1,6 @@
 @php
     /** @var \App\Models\BlogCategory $item */
+    /** @var \Illuminate\Support\Collection $categoryList */
 @endphp
 <div class="container">
     <div class="row justify-content-center">
@@ -52,7 +53,7 @@
                                     id="description"
                                     class="form-control"
                                     rows="3">
-                                    {{ $item->description }}
+                                    {{ old('description', $item->description) }}
                                 </textarea>    
                             </div>
                         </div>

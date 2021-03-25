@@ -75,7 +75,27 @@ class CategoryController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd(__METHOD__,$request->all(),$id);
+        //$id = 111;
+        $item = BlogCategory::find($id);
+        if (empty($item)) {
+            return back()
+                ->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
+                ->withInput();
+        }
+        
+        $data = $request->all();
+        $result = $item->fill($data)->save();
+
+        if ($result) {
+            return redirect()
+                ->route('blog.admin.categories.edit', $item->id)
+                ->with(['success' => 'Успешно сохранено']);
+        } else {
+            return back()
+                ->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
