@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog\Admin;
 
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
+use App\Http\Requests\BlogCategoryUpdateRequest;
 
 class CategoryController extends BaseController
 {
@@ -26,7 +27,10 @@ class CategoryController extends BaseController
      */
     public function create()
     {
-        //
+        $item = new BlogCategory();
+        $categoryList = BlogCategory::all();
+
+        return view('blog.admin.category.edit', compact('item','categoryList'));
     }
 
     /**
@@ -73,7 +77,7 @@ class CategoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogCategoryUpdateRequest $request, $id)
     {
         //dd(__METHOD__,$request->all(),$id);
         //$id = 111;
