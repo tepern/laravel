@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog\Admin;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogCategoryUpdateRequest;
+use Illuminate\Support\Str;
 
 class CategoryController extends BaseController
 {
@@ -43,7 +44,7 @@ class CategoryController extends BaseController
     {
         $data = $request->input();
         if (empty($data['slug'])) {
-            $data['slug'] = str_slug($data['title']);
+            $data['slug'] = Str::slug($data['title']);
         }
 
         $item = new BlogCategory($data);
@@ -95,7 +96,7 @@ class CategoryController extends BaseController
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
         //dd(__METHOD__,$request->all(),$id);
-        
+
         $item = BlogCategory::find($id);
         if (empty($item)) {
             return back()
@@ -104,6 +105,11 @@ class CategoryController extends BaseController
         }
         
         $data = $request->all();
+
+        if (empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+
         $result = $item->fill($data)->save();
 
         if ($result) {
