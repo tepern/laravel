@@ -39,9 +39,24 @@ class CategoryController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogCategoryUpdateRequest $request)
     {
-        //
+        $data = $request->input();
+        if (empty($data['slug'])) {
+            $data['slug'] = str_slug($data['title']);
+        }
+
+        $item = new BlogCategory($data);
+        //dd($item);
+        $item->save();
+
+        if ($item) {
+            return redirect()->route('blog.admin.categories.edit', [$item->id])
+            ->with(['success' => 'Успешно сохранено']);
+        } else {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
@@ -80,7 +95,7 @@ class CategoryController extends BaseController
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
         //dd(__METHOD__,$request->all(),$id);
-        //$id = 111;
+        
         $item = BlogCategory::find($id);
         if (empty($item)) {
             return back()
