@@ -110,7 +110,7 @@ class CategoryController extends BaseController
             $data['slug'] = Str::slug($data['title']);
         }
 
-        $result = $item->fill($data)->save();
+        $result = $item->update();
 
         if ($result) {
             return redirect()
