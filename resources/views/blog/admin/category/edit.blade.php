@@ -18,11 +18,11 @@
             @if($errors->any())
                 <div class="row justify-content-center">
                     <div class="col-md-11">
-                        <div class="alert alert-danger" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                                {{ $errors->first() }}
+                        <div class="alert alert-danger d-flex" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"></span>
                             </button>
+                            <div>{{ $errors->first() }}</div>
                         </div>
                     </div>
                 </div>
@@ -30,11 +30,11 @@
             @if(session('success'))
                 <div class="row justify-content-center">
                     <div class="row-md-11">
-                        <div class="alert alert-success" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                                {{ session()->get('success') }}
+                        <div class="alert alert-success d-flex" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"></span>
                             </button>
+                            <div>{{ session()->get('success') }}</div>
                         </div>
                     </div>
                 </div>
