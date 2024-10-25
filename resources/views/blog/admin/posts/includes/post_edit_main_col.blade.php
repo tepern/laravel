@@ -17,10 +17,10 @@
                     <div class="card-subtitle mb-2 text-muted"></div>
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#maindata" role="tab">Основные данные</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#maindata" role="tab">Основные данные</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#add_data" role="tab">Дополнительные данные</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#add_data" role="tab">Дополнительные данные</a>
                         </li>
                     </ul>
                     <br>
@@ -40,7 +40,7 @@
                                 <textarea name="content_raw"
                                           id="content_raw"
                                           class="form-control"
-                                          rows="20">{{ old('content_raw', $item->content_raw) }}
+                                          rows="20">{{ $item->content_raw ?? old('content_raw') }}
                                 </textarea>           
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                                 <textarea name="preview"
                                           id="preview"
                                           class="form-control"
-                                          rows="3">{{ old('excerpt', $item->excerpt) }}
+                                          rows="3">{{ $item->excerpt ?? old('excerpt') }}
                                 </textarea>      
                             </div>
                             <div class="form-check">
